@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authController = require("../controllers/user");
 
 // sign up
-router.post("/signup", authController.signup);
+router.post("/signup", authController.uploadImage.array("docs", 2), authController.signup);
 
 //verify sign up otp
 router.post("/signup/verify", authController.verifyOTP);

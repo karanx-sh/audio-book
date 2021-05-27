@@ -1,16 +1,46 @@
 const jwt = require("jsonwebtoken");
 const moment = require("moment-timezone");
+const fs = require("fs");
+const path = require("path");
+const uniqid = require("uniqid");
+const multer = require("multer");
 const { Op } = require("sequelize");
 const customError = require("../custom/errors");
 const User = require("../models/user.js");
 const Otp = require("../models/otp");
 const Tokens = require("../models/tokens");
+const Docs = require("../models/docs");
+
 const { tokenGenerator, random, makeRandom, message, compareTime, generateOTP, hashPassword, sendMail } = require("../custom/functions");
+const { getSignedURL, uploadFile, deleteFile } = require("../custom/s3");
+
+const imageStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join("./uploads")); // save the initial images in uploads folder
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${uniqid()}${file.originalname.replace(/\s/g, "")}`); // rename the image with a unique ID + file name
+  },
+});
+
+// check the file format before saving....
+const multerFilter = (req, file, cb) => {
+  var ext = path.extname(file.originalname);
+  if (ext == ".pdf" || ext == ".png" || ext == ".img" || ext == ".jpg" || ext == ".jpeg" || ext == ".PDF" || ext == ".PNG" || ext == ".IMG" || ext == ".JPG" || ext == ".JPEG") {
+    cb(null, true);
+  } else {
+    cb("Only pdf and images are allowed", false);
+  }
+};
+
+exports.uploadImage = multer({
+  storage: imageStorage,
+  fileFilter: multerFilter,
+});
 
 exports.signup = async (req, res) => {
   try {
-    console.log(req.body.number);
-    if (!req.body.email || !req.body.name || !req.body.number) throw customError.dataInvalid;
+    if (!req.body.email || !req.body.name || !req.body.number || !req.files) throw customError.dataInvalid;
     let user = await User.findOne({
       where: {
         [Op.or]: [{ email: req.body.email }, { number: req.body.number }],
@@ -20,6 +50,13 @@ exports.signup = async (req, res) => {
     if (user) {
       if (user.status === "verified" || user.status === "unauthorized") throw customError.userExists;
       if (user.status === "created") {
+        let docs = await Docs.findAll({ where: { user_id: user.id } });
+        if (docs) {
+          docs.map(async (doc) => {
+            await deleteFile(doc.key);
+            await doc.destroy();
+          });
+        }
         user.destroy();
       }
     }
@@ -29,7 +66,15 @@ exports.signup = async (req, res) => {
       email: req.body.email,
       number: req.body.number,
     });
-    generateOTP(4, user);
+    await Promise.all(
+      req.files.map(async (file) => {
+        key = await uploadFile(path.join(file.path), file.originalname);
+        await Docs.create({ key: key.key, user_id: user.id });
+        fs.unlinkSync(path.join(file.path));
+      })
+    );
+
+    // generateOTP(4, user);
 
     res.status(200).json({
       error: false,

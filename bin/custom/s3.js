@@ -12,12 +12,13 @@ const s3 = new AWS.S3({
 const uploadFile = async (fileName, name) => {
   return new Promise((resolve, reject) => {
     // Read content from the file
+    console.log("File upload started");
     const fileContent = fs.readFileSync(fileName);
 
     // Setting up S3 upload parameters
     const params = {
       Bucket: process.env.AWS_BUCKET,
-      Key: `${uniqid()}_{${name}}`, // File name you want to save as in S3
+      Key: `${uniqid()}_${name.replace(/\s/g, "")}`, // File name you want to save as in S3
       Body: fileContent,
     };
     let dataLink;
@@ -28,8 +29,6 @@ const uploadFile = async (fileName, name) => {
         console.log(err);
         throw err;
       }
-      dataLink = data.Location;
-      console.log(`File uploaded successfully. ${data.Location}`);
       resolve(data);
     });
   });

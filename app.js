@@ -20,12 +20,15 @@ db.authenticate()
 const User = require("./bin/models/user");
 const Tokens = require("./bin/models/tokens");
 const Otp = require("./bin/models/otp");
+const Docs = require("./bin/models/docs");
 
 User.hasMany(Tokens, { onDelete: "cascade", foreignKey: "user_id" });
 User.hasMany(Otp, { onDelete: "cascade", foreignKey: "user_id" });
+User.hasMany(Docs, { onDelete: "cascade", foreignKey: "user_id" });
 
 Tokens.belongsTo(User, { foreignKey: "user_id" });
 Otp.belongsTo(User, { foreignKey: "user_id" });
+Docs.belongsTo(User, { foreignKey: "user_id" });
 
 //******* SETTING CORS HEADER *******\\
 app.use((req, res, next) => {
