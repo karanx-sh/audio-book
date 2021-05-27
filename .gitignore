@@ -1,0 +1,11 @@
+#node modules excluding
+node_modules/
+jspm_packages/
+package-lock.json
+
+
+# exclude everything
+uploads/blog/*
+
+# exception to the rule
+!uploads/blog/.gitkeep 
