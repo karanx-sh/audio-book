@@ -10,6 +10,7 @@ const cloud = require("../custom/cloud");
 
 const audioStorage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log(path.join("uploads"));
     cb(null, path.join("uploads")); // save the initial in uploads folder
   },
   filename: function (req, file, cb) {

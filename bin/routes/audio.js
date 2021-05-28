@@ -5,15 +5,7 @@ const authConrtoller = require("../custom/authmiddleware");
 const apiUrl = process.env.API;
 
 // To add new blog
-router.post(
-  "/Add",
-  audioController.uploadAudio.single("audio"),
-  (req, res, next) => {
-    console.log(req);
-    next();
-  },
-  audioController.addAudioBook
-);
+router.post("/Add", audioController.uploadAudio.single("audio"), audioController.addAudioBook);
 
 // To get all blogs
 router.get("/get/all", audioController.getAudio);
