@@ -13,12 +13,15 @@ const audioStorage = multer.diskStorage({
     cb(null, path.join("uploads")); // save the initial in uploads folder
   },
   filename: function (req, file, cb) {
+    console.log("Disk storage  " + file.originalname);
+
     cb(null, `${uniqid()}${file.originalname}`); // rename the audio with a unique ID + file name
   },
 });
 
 // check the file format before saving....
 const multerFilter = (req, file, cb) => {
+  console.log("filter " + file.originalname);
   var ext = path.extname(file.originalname);
   if (ext == ".mp4" || ext == ".mp3") {
     cb(null, true);
