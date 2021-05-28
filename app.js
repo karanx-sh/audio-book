@@ -72,10 +72,6 @@ app.use("/audio", audioRoutes);
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 
-app.use("/", (req, res) => {
-  res.redirect("/audio/manage");
-});
-
 //******* ERROR HANDLING *******\\
 app.use((req, res, next) => {
   const error = new CustomError("Not Found!", `Uh oh! the path you are trying to reach we can't find it, we've checked each an every corner!`, 404);
