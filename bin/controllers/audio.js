@@ -7,11 +7,10 @@ const CustomError = require("../custom/error"); // Importing Custome Error class
 const customError = require("../custom/errors"); // Importing Developer Defined Custom Errors
 const { getSignedURL, uploadFile, deleteFile } = require("../custom/s3");
 const cloud = require("../custom/cloud");
-const rootPath = require("../../root_path");
 
 const audioStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(rootPath, "uploads")); // save the initial in uploads folder
+    cb(null, path.join("./uploads")); // save the initial in uploads folder
   },
   filename: function (req, file, cb) {
     cb(null, `${uniqid()}${file.originalname}`); // rename the audio with a unique ID + file name
