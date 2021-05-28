@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "b6fc3e12-525f-49d1-acd7-724d4a868db9",
+		"name": "audio-books",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "audioBooks",
+			"item": [
+				{
+					"name": "upload audio book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Jadu hey nasha hey ",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Album song",
+									"type": "text"
+								},
+								{
+									"key": "author",
+									"value": "T-series",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "audio",
+									"type": "file",
+									"src": "/C:/Users/karan/Documents/songs/jadu hey nasha hey.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/audio/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"audio",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all audio books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/audio/get/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"audio",
+								"get",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get signed url ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "6381858b-9a25-494a-8b5e-9cf771a08937",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/audio/get/signed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"audio",
+								"get",
+								"signed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": " delete audio book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "347fe624-7e72-4217-b700-786e95437dcd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/audio/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"audio",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "signup with file upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "docs",
+									"type": "file",
+									"src": [
+										"/C:/Users/karan/Documents/Qr code 2.PNG",
+										"/C:/Users/karan/Documents/Qr code scanner.PNG"
+									]
+								},
+								{
+									"key": "number",
+									"value": "8169157715",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "karan",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "karan@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								},
+								{
+									"key": "cpassword",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup otp verification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "number",
+									"value": "8169157715",
+									"type": "text"
+								},
+								{
+									"key": "otp",
+									"value": "4824",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/auth/signup/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"auth",
+								"signup",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "admin signup only development",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Admin test",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "karan.patil@sakec.ac.in",
+									"type": "text"
+								},
+								{
+									"key": "number",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "karan9720",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/admin/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"admin",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "karan9720",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/admin/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0MGFkMjIyLTNlNmUtNDAzOS1hMmQzLWU5ZWJlM2JkM2E2MCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2MjIxODgxNDMsImV4cCI6MTYyMjIxODE0M30.NhYgVwN14c2NQiBvi9EizlkjzilMG76eeb2MzBtlmjc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/admin/user/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"admin",
+								"user",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0MGFkMjIyLTNlNmUtNDAzOS1hMmQzLWU5ZWJlM2JkM2E2MCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2MjIxODgxNDMsImV4cCI6MTYyMjIxODE0M30.NhYgVwN14c2NQiBvi9EizlkjzilMG76eeb2MzBtlmjc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "85497bfd-70fb-47a1-833b-e1469eb851e1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/admin/user/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"admin",
+								"user",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ban user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0MGFkMjIyLTNlNmUtNDAzOS1hMmQzLWU5ZWJlM2JkM2E2MCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2MjIxODgxNDMsImV4cCI6MTYyMjIxODE0M30.NhYgVwN14c2NQiBvi9EizlkjzilMG76eeb2MzBtlmjc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "85497bfd-70fb-47a1-833b-e1469eb851e1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/admin/user/ban",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"admin",
+								"user",
+								"ban"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -15,7 +15,6 @@ exports.checkCustomer = async (req, res, next) => {
       valid = false;
 
     req.user = await User.findOne({ where: { id: decodedUser.id, status: "verified", role: "customer" } });
-
     tokens = await Tokens.findAll({ where: { user_id: req.user.id } });
     tokens.forEach((token) => {
       if (access == token.access) return (valid = true);

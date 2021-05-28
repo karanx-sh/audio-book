@@ -1,6 +1,7 @@
 const moment = require("moment-timezone");
 const Sequelize = require("sequelize");
 const db = require("../../connection");
+const bcrypt = require("bcryptjs");
 
 const UserSchema = {
   id: {
@@ -20,13 +21,16 @@ const UserSchema = {
     type: Sequelize.STRING(256),
     unique: true,
   },
+  password: {
+    type: Sequelize.STRING(256),
+  },
   role: {
     type: Sequelize.STRING(256),
     defaultValue: "customer",
   },
   status: {
     type: Sequelize.STRING(256),
-    defaultValue: "created",
+    defaultValue: "init",
   },
   created_at: {
     type: Sequelize.STRING(256),
@@ -34,6 +38,17 @@ const UserSchema = {
   },
 };
 
-module.exports = db.define("user", UserSchema, {
+User = db.define("user", UserSchema, {
   freezeTableName: true,
 });
+
+function hashPassword(password) {
+  return bcrypt.hash(password, bcrypt.genSaltSync(8));
+}
+
+User.beforeCreate(async (user, options) => {
+  const hashedPassword = await hashPassword(user.password);
+  user.password = hashedPassword;
+});
+
+module.exports = User;

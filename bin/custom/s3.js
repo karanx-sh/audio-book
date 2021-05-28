@@ -12,7 +12,6 @@ const s3 = new AWS.S3({
 const uploadFile = async (fileName, name) => {
   return new Promise((resolve, reject) => {
     // Read content from the file
-    console.log("File upload started");
     const fileContent = fs.readFileSync(fileName);
 
     // Setting up S3 upload parameters

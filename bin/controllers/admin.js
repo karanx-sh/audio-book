@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const moment = require("moment-timezone");
 const { Op } = require("sequelize");
+const bcrypt = require("bcryptjs");
+
 const customError = require("../custom/errors");
 const User = require("../models/user.js");
 const Otp = require("../models/otp");
@@ -9,21 +11,21 @@ const { tokenGenerator, random, makeRandom, message, compareTime, generateOTP, h
 
 exports.signup = async (req, res) => {
   try {
-    if (!req.body.email || !req.body.name || !req.body.number) throw customError.dataInvalid;
+    if (!req.body.email || !req.body.name || !req.body.number || !req.body.password) throw customError.dataInvalid;
     let user = await User.findOne({
       where: {
         [Op.or]: [{ email: req.body.email }, { number: req.body.number }],
       },
     });
-
+    if (user) throw customError.userExists;
     user = await User.create({
       name: req.body.name,
       email: req.body.email,
       number: req.body.number,
+      password: req.body.password,
       role: "admin",
       status: "verified",
     });
-    generateOTP(4, user);
 
     res.status(200).json({
       error: false,
@@ -40,75 +42,9 @@ exports.signup = async (req, res) => {
   }
 };
 
-exports.verifyOTP = async (req, res) => {
-  try {
-    if (!req.body.number || !req.body.otp) throw customError.dataInvalid;
-
-    let user = await User.findOne({
-      where: { number: req.body.number, status: "created" },
-    });
-
-    if (user == null) throw customError.userNotFound;
-
-    let otp = await Otp.findOne({ where: { user_id: user.id } });
-
-    if (otp.code != req.body.otp || compareTime(moment.tz(Date.now(), "ASIA/KOLKATA"), otp.valid_till) > 0) throw customError.authFailed;
-
-    user.status = "verified";
-
-    await user.save();
-    await otp.destroy();
-    res.status(200).json({
-      error: false,
-      details: {
-        message: "User Verified Sucessfully!",
-        token: await tokenGenerator(user),
-        user: user,
-      },
-    });
-  } catch (error) {
-    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
-    return res.status(error.code || 500).json({
-      error: true,
-      details: error,
-    });
-  }
-};
-
-exports.sendOTP = async (req, res) => {
-  try {
-    if (!req.body.number) throw customError.dataInvalid;
-    let user = await User.findOne({ where: { number: req.body.number, role: "admin" } });
-    if (!user) throw customError.userNotFound;
-    let otp = await Otp.findOne({ where: { user_id: user.id } });
-    if (otp) {
-      if (compareTime(moment.tz(Date.now(), "ASIA/KOLKATA"), otp.valid_till) < 0) {
-        throw customError.badRequest;
-      } else {
-        await otp.destroy();
-      }
-    }
-
-    await generateOTP(4, user);
-
-    res.status(200).json({
-      error: false,
-      details: {
-        message: "OTP RESENT Successfully",
-      },
-    });
-  } catch (error) {
-    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
-    return res.status(error.code).json({
-      error: true,
-      details: error,
-    });
-  }
-};
-
 exports.login = async (req, res) => {
   try {
-    if (!req.body.username || !req.body.otp) throw customError.dataInvalid;
+    if (!req.body.username || !req.body.password) throw customError.dataInvalid;
     let user = await User.findOne({
       where: {
         [Op.or]: [{ email: req.body.username }, { number: req.body.username }],
@@ -117,18 +53,22 @@ exports.login = async (req, res) => {
       },
     });
     if (!user) throw customError.userNotFound;
-    if (user.status === "unauthorized") throw customError.userBanned;
-    let otp = await Otp.findOne({ where: { user_id: user.id } });
-    if (!otp) throw customError.badRequest;
-    if (otp.code != req.body.otp || compareTime(moment.tz(Date.now(), "ASIA/KOLKATA"), otp.valid_till) > 0) throw customError.authFailed;
-    await otp.destroy();
-    res.status(200).json({
-      error: false,
-      details: {
-        token: await tokenGenerator(user),
-        user: user,
-      },
-    });
+    if (bcrypt.compareSync(req.body.password, user.password)) {
+      res.status(200).json({
+        error: false,
+        details: {
+          token: await tokenGenerator(user),
+          user: user,
+        },
+      });
+    } else {
+      res.status(401).json({
+        error: true,
+        details: {
+          message: "Username or Password is incorrect!!!",
+        },
+      });
+    }
   } catch (error) {
     console.log(`***** ERROR : ${req.originalUrl} ${error}`);
     return res.status(error.code).json({
@@ -181,8 +121,8 @@ exports.refresh = async (req, res) => {
 
 exports.verifyUser = async (req, res) => {
   try {
-    if (!req.body.user_id) throw customError.dataInvalid;
-    let user = await User.findOne({ where: { id: req.body.user_id, role: "customer" } });
+    if (!req.body.id) throw customError.dataInvalid;
+    let user = await User.findOne({ where: { id: req.body.id, role: "customer" } });
     await user.update({
       status: "verified",
     });
@@ -223,8 +163,8 @@ exports.listUsers = async (req, res) => {
 
 exports.BanUser = async (req, res) => {
   try {
-    if (!req.body.user_id) throw customError.dataInvalid;
-    let user = await User.findOne({ where: { id: req.body.user_id, role: "customer", status: "verified" } });
+    if (!req.body.id) throw customError.dataInvalid;
+    let user = await User.findOne({ where: { id: req.body.id, role: "customer", status: "verified" } });
     await user.update({
       status: "unauthorized",
     });
