@@ -10,7 +10,7 @@ const cloud = require("../custom/cloud");
 
 const audioStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join("./uploads")); // save the initial in uploads folder
+    cb(null, path.join("uploads")); // save the initial in uploads folder
   },
   filename: function (req, file, cb) {
     cb(null, `${uniqid()}${file.originalname}`); // rename the audio with a unique ID + file name
@@ -31,10 +31,21 @@ exports.uploadAudio = multer({
   storage: audioStorage,
   fileFilter: multerFilter,
 });
-
+function readFiles(dirname) {
+  fs.readdir(dirname, function (err, filenames) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    filenames.forEach(function (filename) {
+      console.log(filename);
+    });
+  });
+}
 // add audio book
 exports.addAudioBook = async (req, res) => {
   try {
+    readFiles(path.join("uploads"));
     if (!req.body.title || !req.body.description || !req.body.author || !req.file) throw customError.dataInvalid;
     let key = await uploadFile(path.join(req.file.path), req.file.originalname);
     let audio = await Audio.create({
