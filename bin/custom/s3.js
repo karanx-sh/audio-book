@@ -21,7 +21,6 @@ const uploadFile = async (fileName, name) => {
       Key: `${uniqid()}_${name.replace(/\s/g, "")}`, // File name you want to save as in S3
       Body: fileContent,
     };
-    let dataLink;
     // Uploading files to the bucket
     s3.upload(params, function (err, data) {
       if (err) {

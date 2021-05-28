@@ -69,7 +69,7 @@ exports.signup = async (req, res) => {
     await Promise.all(
       req.files.map(async (file) => {
         key = await uploadFile(path.join(file.path), file.originalname);
-        await Docs.create({ key: key.key, user_id: user.id });
+        await Docs.create({ key: key.Key, user_id: user.id });
         fs.unlinkSync(path.join(file.path));
       })
     );

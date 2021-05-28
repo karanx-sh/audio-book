@@ -41,7 +41,7 @@ exports.addAudioBook = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       author: req.body.author,
-      key: key.key,
+      key: key.Key,
     });
     fs.unlinkSync(path.join(req.file.path));
     return res.status(200).json({
