@@ -18,29 +18,45 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Jadu hey nasha hey ",
+									"value": "My English Book (Std. I)  (Maharashtra State Board, Pune)",
 									"type": "text"
 								},
 								{
-									"key": "description",
-									"value": "Album song",
+									"key": "code",
+									"value": "E0944",
 									"type": "text"
-								},
-								{
-									"key": "author",
-									"value": "T-series",
-									"type": "text"
-								},
-								{
-									"key": "",
-									"value": "",
-									"type": "text",
-									"disabled": true
 								},
 								{
 									"key": "audio",
 									"type": "file",
-									"src": "/C:/Users/karan/Documents/songs/jadu hey nasha hey.mp4"
+									"src": [
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/01_Bhoogol_XII_MSB_MM.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/02_Sanvidan__Rashtra_Geet.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/03_Prastavna.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/04_Shamata_Vidhane.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/05_Shikshakasaati.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/06_Anukramanika.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/07_Chapter_1__Loksankhya_Bhag_1.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/08_Chapter_1__Loksankhya_Bhag_1_Part_2.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/09_Chapter_2__Loksankhya_Bhag_2.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/10_Chapter_2__Loksankhya_Bhag_2__Part_2_.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/11_Chapter_3__Manavi_Vasti.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/12_Chapter_3__Manavi_Vasti__Part_2_.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/13_Chapter_4__Prarthmik_Aarthik_Kriya.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/14_Chapter_4__Prarthmik_Aarthik_Kriya__Part_2_.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/15_Chapter_5__Drithiya_Aarthik_Kriya.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/16_Chapter_5__Drithiya_Aarthik_Kriya__Part_2_.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/17_Chapter_6__Drithiya_Aarthik_Kriya.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/18_Chapter_6__Drithiya_Aarthik_Kriya__Part_2_.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/19_Chapter_7__Pravesh_ani_pradeshik_vikaas.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/20_Chapter_7__Pravesh_ani_pradeshik_vikaas__Part_2_.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/21_Chapter_8__Bhoogaol_Swaroop_Va_Vaypti.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/22_Jagaache_Nakaashe.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/23_Prathyashike.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/24_Prathyashike__Part_2_.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/25_Prathyashike__Part_3_.mp3",
+										"/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/26_Prathyashike__Part_4_.mp3"
+									]
 								}
 							]
 						},
@@ -90,7 +106,7 @@
 							"urlencoded": [
 								{
 									"key": "id",
-									"value": "6381858b-9a25-494a-8b5e-9cf771a08937",
+									"value": "0090c042-8f47-4765-8603-15e960a1ddae",
 									"type": "text"
 								}
 							]
@@ -121,7 +137,7 @@
 							"urlencoded": [
 								{
 									"key": "id",
-									"value": "347fe624-7e72-4217-b700-786e95437dcd",
+									"value": "d4c109a0-75fe-45c9-8c5e-77778d71edf5",
 									"type": "text"
 								}
 							]
@@ -136,6 +152,37 @@
 							"path": [
 								"audio",
 								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get books by audio id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "d4c109a0-75fe-45c9-8c5e-77778d71edf5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/audio/books/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"audio",
+								"books",
+								"get"
 							]
 						}
 					},
@@ -164,7 +211,7 @@
 								},
 								{
 									"key": "number",
-									"value": "8169157715",
+									"value": "8169157716",
 									"type": "text"
 								},
 								{
@@ -174,7 +221,7 @@
 								},
 								{
 									"key": "email",
-									"value": "karan@gmail.com",
+									"value": "karan2000patil@gmail.com",
 									"type": "text"
 								},
 								{

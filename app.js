@@ -21,14 +21,18 @@ const User = require("./bin/models/user");
 const Tokens = require("./bin/models/tokens");
 const Otp = require("./bin/models/otp");
 const Docs = require("./bin/models/docs");
+const Books = require("./bin/models/books");
+const Audio = require("./bin/models/audio");
 
 User.hasMany(Tokens, { onDelete: "cascade", foreignKey: "user_id" });
 User.hasMany(Otp, { onDelete: "cascade", foreignKey: "user_id" });
 User.hasMany(Docs, { onDelete: "cascade", foreignKey: "user_id" });
+Audio.hasMany(Books, { onDelete: "cascade", foreignKey: "audio_id" });
 
 Tokens.belongsTo(User, { foreignKey: "user_id" });
 Otp.belongsTo(User, { foreignKey: "user_id" });
 Docs.belongsTo(User, { foreignKey: "user_id" });
+Books.belongsTo(Audio, { foreignKey: "audio_id" });
 
 //******* SETTING CORS HEADER *******\\
 app.use((req, res, next) => {
@@ -59,8 +63,6 @@ app.use(express.json());
 app.use(require("body-parser").json());
 app.use(require("body-parser").urlencoded({ extended: true, limit: "100mb" }));
 app.use(require("body-parser").json({ limit: "100mb" }));
-app.set("view engine", "ejs"); // setting view engine to ejs
-app.use(express.static("public")); // serving static files
 
 //******* IMPORTING THE ROUTES *******\\
 const audioRoutes = require("./bin/routes/audio");

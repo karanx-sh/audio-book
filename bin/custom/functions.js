@@ -118,7 +118,7 @@ const generateOTP = async (length, user) => {
     valid_till: validTill,
     message_sent_at: moment.tz(Date.now(), "ASIA/KOLKATA").toString(),
   });
-  // sendMail(code, user.email, "Email Otp");
+  sendMail(code, user.email, "Email Otp");
 };
 
 const hashPassword = async (password) => {

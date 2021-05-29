@@ -4,20 +4,19 @@ const authConrtoller = require("../custom/authmiddleware");
 
 const apiUrl = process.env.API;
 
-// To add new blog
-router.post("/Add", audioController.uploadAudio.single("audio"), audioController.addAudioBook);
+// To add new audio
+router.post("/Add", audioController.uploadAudio.array("audio"), audioController.addAudioBook);
 
-// To get all blogs
+// To get all audios
 router.get("/get/all", audioController.getAudio);
 
-router.post("/get/signed", audioController.getAudioSigned);
+//get book signed url
+router.post("/get/signed", audioController.getBookSigned);
+
+//get all books by audio id
+router.post("/books/get", audioController.getBooks);
 
 // To remove the blog
 router.post("/delete", audioController.remove);
-
-// manage blogs page
-router.get("/manage", (req, res) => {
-  res.render("index", { api: apiUrl });
-});
 
 module.exports = router;

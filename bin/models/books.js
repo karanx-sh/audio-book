@@ -1,7 +1,7 @@
 const moment = require("moment-timezone");
 const Sequelize = require("sequelize");
 const db = require("../../connection");
-const audioSchema = {
+const booksSchema = {
   id: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV4,
@@ -9,17 +9,17 @@ const audioSchema = {
     primaryKey: true,
   },
   title: {
-    type: Sequelize.STRING(2048),
-  },
-  code: {
     type: Sequelize.STRING(256),
   },
-  createdAt: {
+  key: {
+    type: Sequelize.STRING(512),
+  },
+  created_at: {
     type: Sequelize.STRING(256),
-    defaultValue: moment.tz(Date.now(), "Asia/Kolkata").format("DD/MM/YYYY"),
+    defaultValue: moment.tz(Date.now(), "Asia/Kolkata").toString(),
   },
 };
 
-module.exports = db.define("audio", audioSchema, {
+module.exports = db.define("books", booksSchema, {
   freezeTableName: true,
 });
