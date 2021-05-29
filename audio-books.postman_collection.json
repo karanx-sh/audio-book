@@ -261,12 +261,12 @@
 							"urlencoded": [
 								{
 									"key": "number",
-									"value": "8169157715",
+									"value": "8169157716",
 									"type": "text"
 								},
 								{
 									"key": "otp",
-									"value": "4824",
+									"value": "4481",
 									"type": "text"
 								}
 							]
@@ -282,6 +282,41 @@
 								"auth",
 								"signup",
 								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "8169157716",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"auth",
+								"login"
 							]
 						}
 					},
