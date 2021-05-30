@@ -143,7 +143,7 @@ exports.verifyUser = async (req, res) => {
 
 exports.listUsers = async (req, res) => {
   try {
-    let user = await User.findAll({ where: { role: "customer" } });
+    let user = await User.findAll({ where: { role: "customer", status: { [Op.ne]: "init" } } });
 
     res.status(200).json({
       error: false,

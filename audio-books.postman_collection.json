@@ -187,6 +187,109 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "update books",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "fb9c0ee3-0207-4d27-9028-cbcc43618891",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "22_Jagaache_Nakaashe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/audio/book/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"audio",
+								"book",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add books",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "8bc58f74-471d-4608-8f85-e7750790bcf7",
+									"type": "text"
+								},
+								{
+									"key": "books",
+									"type": "file",
+									"src": "/C:/Users/karan/Downloads/M1660 Bhoogol 12 MM MSB 2020/M1660 Bhoogol 12 MM MSB 2020/03_Prastavna.mp3"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/audio/book/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"audio",
+								"book",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove books",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "39a04cc2-435d-4366-a710-5efd1f87b569",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/audio/book/remove",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"audio",
+								"book",
+								"remove"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

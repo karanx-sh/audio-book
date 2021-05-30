@@ -16,7 +16,16 @@ router.post("/get/signed", audioController.getBookSigned);
 //get all books by audio id
 router.post("/books/get", audioController.getBooks);
 
-// To remove the blog
+// To remove the audio book
 router.post("/delete", audioController.remove);
+
+// add chapter to audio book
+router.post("/book/add", audioController.uploadAudio.array("books"), audioController.addBooks);
+
+// update chapter of the audio book
+router.post("/book/update", audioController.updateBooks);
+
+// remove chapter of the audio book
+router.post("/book/remove", audioController.remove);
 
 module.exports = router;

@@ -66,6 +66,31 @@ exports.addAudioBook = async (req, res) => {
   }
 };
 
+// update audio book details
+exports.updateAudioBook = async (req, res) => {
+  try {
+    if (!req.body.title || !req.body.code || !req.body.id) throw customError.dataInvalid;
+    let audio = await Audio.findByPk(req.body.id);
+    await audio.update({
+      title: req.body.title,
+      code: req.body.code,
+    });
+
+    return res.status(200).json({
+      error: false,
+      details: {
+        message: "Audio Book updated Successfully",
+      },
+    });
+  } catch (error) {
+    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
+    return res.status(error.code || 500).json({
+      error: true,
+      details: error,
+    });
+  }
+};
+
 // get all audio books
 exports.getAudio = async (req, res) => {
   try {
@@ -150,6 +175,86 @@ exports.remove = async (req, res) => {
       error: false,
       details: {
         message: "Audio Book Deleted successfully",
+      },
+    });
+  } catch (error) {
+    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
+    return res.status(error.code || 500).json({
+      error: true,
+      details: error,
+    });
+  }
+};
+
+// add book to the audio
+exports.addBooks = async (req, res) => {
+  try {
+    if (!req.body.id || !req.files) throw customError.dataInvalid;
+    let audio = await Audio.findByPk(req.body.id);
+    if (!audio) throw customError.audioNotFound;
+    req.files.map(async (file) => {
+      key = await uploadFile(path.join(file.path), file.originalname);
+      await Books.create({
+        title: file.originalname,
+        key: key.Key,
+        audio_id: audio.id,
+      });
+      fs.unlinkSync(path.join(file.path));
+    });
+
+    return res.status(200).json({
+      error: false,
+      details: {
+        message: "Audio Book Added Successfully",
+      },
+    });
+  } catch (error) {
+    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
+    return res.status(error.code || 500).json({
+      error: true,
+      details: error,
+    });
+  }
+};
+
+// update book details
+exports.updateBooks = async (req, res) => {
+  try {
+    if (!req.body.id || !req.body.title) throw customError.dataInvalid;
+    let book = await Books.findByPk(req.body.id);
+    if (!book) throw customError.chapterNotFound;
+    await book.update({
+      title: req.body.title,
+    });
+    res.status(200).json({
+      error: false,
+      details: {
+        message: "Audio Book chapter updated Successfully",
+      },
+    });
+  } catch (error) {
+    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
+    return res.status(error.code || 500).json({
+      error: true,
+      details: error,
+    });
+  }
+};
+
+// remove book
+exports.remove = async (req, res) => {
+  try {
+    if (!req.body.id) throw customError.dataInvalid;
+    let book = await Books.findByPk(req.body.id);
+    if (!book) throw customError.chapterNotFound;
+
+    await deleteFile(book.key);
+    await book.destroy();
+
+    return res.status(200).json({
+      error: false,
+      details: {
+        message: "Audio Book chapter Deleted successfully",
       },
     });
   } catch (error) {
