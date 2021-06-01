@@ -242,7 +242,7 @@ exports.updateBooks = async (req, res) => {
 };
 
 // remove book
-exports.remove = async (req, res) => {
+exports.removeBooks = async (req, res) => {
   try {
     if (!req.body.id) throw customError.dataInvalid;
     let book = await Books.findByPk(req.body.id);

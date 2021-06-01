@@ -26,6 +26,6 @@ router.post("/book/add", audioController.uploadAudio.array("books"), audioContro
 router.post("/book/update", audioController.updateBooks);
 
 // remove chapter of the audio book
-router.post("/book/remove", audioController.remove);
+router.post("/book/remove", audioController.removeBooks);
 
 module.exports = router;
