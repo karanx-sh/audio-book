@@ -4,28 +4,31 @@ const authConrtoller = require("../custom/authmiddleware");
 
 const apiUrl = process.env.API;
 
-// To add new audio
-router.post("/Add", audioController.uploadAudio.array("audio"), audioController.addAudioBook);
+// To add new audio book
+router.post("/Add", authConrtoller.checkAdmin, audioController.uploadAudio.array("audio"), audioController.addAudioBook);
 
-// To get all audios
+// To get all audio book
 router.get("/get/all", audioController.getAudio);
 
-//get book signed url
-router.post("/get/signed", audioController.getBookSigned);
+//get audio book chapter signed url
+router.post("/get/signed", authConrtoller.checkCustomer, audioController.getBookSigned);
 
-//get all books by audio id
+//get all chapters by audio book id
 router.post("/books/get", audioController.getBooks);
 
 // To remove the audio book
-router.post("/delete", audioController.remove);
+router.post("/delete", authConrtoller.checkAdmin, audioController.remove);
 
-// add chapter to audio book
-router.post("/book/add", audioController.uploadAudio.array("books"), audioController.addBooks);
+// add to audio book chapter
+router.post("/book/add", authConrtoller.checkAdmin, audioController.uploadAudio.array("books"), audioController.addBooks);
 
-// update chapter of the audio book
-router.post("/book/update", audioController.updateBooks);
+// get all books chapter
+router.get("/books/get/all", audioController.getBooksChapters);
 
-// remove chapter of the audio book
-router.post("/book/remove", audioController.removeBooks);
+// update of the audio book chapter
+router.post("/book/update", authConrtoller.checkAdmin, audioController.updateBooks);
+
+// remove of the audio book chapter
+router.post("/book/remove", authConrtoller.checkAdmin, audioController.removeBooks);
 
 module.exports = router;

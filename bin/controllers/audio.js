@@ -112,7 +112,7 @@ exports.getAudio = async (req, res) => {
   }
 };
 
-// get all audio books
+// get all audio books chpater by audio id
 exports.getBooks = async (req, res) => {
   try {
     if (!req.body.id) throw customError.dataInvalid;
@@ -122,7 +122,7 @@ exports.getBooks = async (req, res) => {
     return res.status(200).json({
       error: false,
       details: {
-        message: "Audio books found",
+        message: "Audio books Chapters found",
         data: books,
       },
     });
@@ -135,6 +135,27 @@ exports.getBooks = async (req, res) => {
   }
 };
 
+// get all books chapter
+exports.getBooksChapters = async (req, res) => {
+  try {
+    let books = await Books.findAll();
+    return res.status(200).json({
+      error: false,
+      details: {
+        message: "Audio books Chapters found",
+        data: books,
+      },
+    });
+  } catch (error) {
+    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
+    return res.status(error.code || 500).json({
+      error: true,
+      details: error,
+    });
+  }
+};
+
+//get Book Signed url
 exports.getBookSigned = async (req, res) => {
   try {
     if (!req.body.id) throw customError.dataInvalid;
@@ -159,7 +180,6 @@ exports.getBookSigned = async (req, res) => {
 };
 
 // remove audio book
-
 exports.remove = async (req, res) => {
   try {
     if (!req.body.id) throw customError.dataInvalid;
@@ -186,7 +206,7 @@ exports.remove = async (req, res) => {
   }
 };
 
-// add book to the audio
+// add audio book chapter
 exports.addBooks = async (req, res) => {
   try {
     if (!req.body.id || !req.files) throw customError.dataInvalid;
@@ -217,7 +237,7 @@ exports.addBooks = async (req, res) => {
   }
 };
 
-// update book details
+// update audio book chapter details
 exports.updateBooks = async (req, res) => {
   try {
     if (!req.body.id || !req.body.title) throw customError.dataInvalid;
@@ -241,7 +261,7 @@ exports.updateBooks = async (req, res) => {
   }
 };
 
-// remove book
+// remove audio book chapter
 exports.removeBooks = async (req, res) => {
   try {
     if (!req.body.id) throw customError.dataInvalid;
