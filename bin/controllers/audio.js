@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const uniqid = require("uniqid");
 const multer = require("multer");
+const { Op } = require("sequelize");
+
 const Audio = require("../models/audio");
 const CustomError = require("../custom/error"); // Importing Custome Error class
 const customError = require("../custom/errors"); // Importing Developer Defined Custom Errors
@@ -275,6 +277,34 @@ exports.removeBooks = async (req, res) => {
       error: false,
       details: {
         message: "Audio Book chapter Deleted successfully",
+      },
+    });
+  } catch (error) {
+    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
+    return res.status(error.code || 500).json({
+      error: true,
+      details: error,
+    });
+  }
+};
+
+// search audio book chapters
+
+exports.searchBooksChapters = async (req, res) => {
+  try {
+    if (!req.body.query) throw customError.dataInvalid;
+    let books = await Books.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${req.body.query}%`,
+        },
+      },
+    });
+    return res.status(200).json({
+      error: false,
+      details: {
+        message: "Audio books Chapters found",
+        data: books,
       },
     });
   } catch (error) {

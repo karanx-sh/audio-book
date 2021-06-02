@@ -23,12 +23,15 @@ router.post("/delete", authConrtoller.checkAdmin, audioController.remove);
 router.post("/book/add", authConrtoller.checkAdmin, audioController.uploadAudio.array("books"), audioController.addBooks);
 
 // get all books chapter
-router.get("/books/get/all", audioController.getBooksChapters);
+router.get("/book/get/all", audioController.getBooksChapters);
 
 // update of the audio book chapter
 router.post("/book/update", authConrtoller.checkAdmin, audioController.updateBooks);
 
 // remove of the audio book chapter
 router.post("/book/remove", authConrtoller.checkAdmin, audioController.removeBooks);
+
+// search books chapter
+router.post("/book/search", audioController.searchBooksChapters);
 
 module.exports = router;
