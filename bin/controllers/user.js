@@ -171,10 +171,10 @@ exports.login = async (req, res) => {
         role: "customer",
       },
     });
+    if (!user) throw customError.userNotFound;
     if (user.status == "created" || user.status == "init") throw customError.userUnderReview;
     if (user.status === "unauthorized") throw customError.userBanned;
 
-    if (!user) throw customError.userNotFound;
     if (bcrypt.compareSync(req.body.password, user.password)) {
       res.status(200).json({
         error: false,
