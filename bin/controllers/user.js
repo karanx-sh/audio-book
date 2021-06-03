@@ -168,10 +168,12 @@ exports.login = async (req, res) => {
     let user = await User.findOne({
       where: {
         [Op.or]: [{ email: req.body.username }, { number: req.body.username }],
-        status: "verified",
         role: "customer",
       },
     });
+    if (user.status == "created" || user.status == "init") throw customError.userUnderReview;
+    if (user.status === "unauthorized") throw customError.userBanned;
+
     if (!user) throw customError.userNotFound;
     if (bcrypt.compareSync(req.body.password, user.password)) {
       res.status(200).json({
