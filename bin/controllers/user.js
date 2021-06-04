@@ -210,7 +210,7 @@ exports.refresh = async (req, res) => {
       valid = false;
 
     req.user = await User.findOne({ where: { id: decodedRefresh.id } });
-    let tokens = await Tokens.findAll({ where: { user_id: req.user.id } });
+    let tokens = await Tokens.findAll({ where: { user_id: req.user.id }, order: [["created_at", "ASC"]] });
     let ind;
     tokens.forEach((token, i) => {
       if (access == token.access && token.refresh == refresh) {
