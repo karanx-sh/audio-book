@@ -622,6 +622,47 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get users documents",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM0MGFkMjIyLTNlNmUtNDAzOS1hMmQzLWU5ZWJlM2JkM2E2MCIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE2MjI4MjcyNjAsImV4cCI6MTYyMjgyNzU2MH0.vLd3E9KK9YaqYvvQAH8ks5pvEEseMuJYxj-A0_InKZA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "38480d86-92c9-42d5-9d1c-9a2168faee1e",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8001/admin/user/docs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"admin",
+								"user",
+								"docs"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

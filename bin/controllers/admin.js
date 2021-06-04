@@ -5,9 +5,11 @@ const bcrypt = require("bcryptjs");
 
 const customError = require("../custom/errors");
 const User = require("../models/user.js");
+const Docs = require("../models/docs");
 const Otp = require("../models/otp");
 const Tokens = require("../models/tokens");
 const { tokenGenerator, random, makeRandom, message, compareTime, generateOTP, hashPassword, sendMail } = require("../custom/functions");
+const cloud = require("../custom/cloud");
 
 exports.signup = async (req, res) => {
   try {
@@ -177,6 +179,34 @@ exports.BanUser = async (req, res) => {
   } catch (error) {
     console.log(`***** ERROR : ${req.originalUrl} ${error}`);
     return res.status(error.code).json({
+      error: true,
+      details: error,
+    });
+  }
+};
+
+//get Book Signed url
+exports.getDocSigned = async (req, res) => {
+  try {
+    if (!req.body.id) throw customError.dataInvalid;
+    let docs = await Docs.findAll({ where: { user_id: req.body.id } });
+    if (!docs) throw customError.dataNotFound;
+    url = [];
+    await Promise.all(
+      docs.map(async (doc) => {
+        url.push(await cloud.getsignedUrl(process.env.AWS_CDN_DOMAIN, doc.key, 1));
+      })
+    );
+    res.status(200).json({
+      error: false,
+      details: {
+        message: "User Document found",
+        docs: url,
+      },
+    });
+  } catch (error) {
+    console.log(`***** ERROR : ${req.originalUrl} ${error}`);
+    return res.status(error.code || 500).json({
       error: true,
       details: error,
     });

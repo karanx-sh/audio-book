@@ -13,5 +13,6 @@ const badRequest = new CustomError("Bad Request!", `Umm! The stuff you are tryin
 
 const audioNotFound = new CustomError("Audio Book Not Found!", `audio book your are searching is not present`, 404);
 const chapterNotFound = new CustomError("Audio Book chapter Not Found!", `audio book chapter your are searching is not present`, 404);
+const dataNotFound = new CustomError("Data Not Found!", `Data your are searching is not present`, 404);
 
-module.exports = { authFailed, dataInvalid, userNotFound, userExists, userBanned, userUnderReview, duplicateRequest, serverDown, badRequest, audioNotFound, chapterNotFound };
+module.exports = { authFailed, dataInvalid, userNotFound, userExists, userBanned, userUnderReview, duplicateRequest, serverDown, badRequest, audioNotFound, chapterNotFound, dataNotFound };

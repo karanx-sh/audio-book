@@ -17,4 +17,6 @@ router.post("/user/ban", authConrtoller.checkAdmin, adminController.BanUser);
 
 router.get("/user/list", authConrtoller.checkAdmin, adminController.listUsers);
 
+router.post("/user/docs", authConrtoller.checkAdmin, adminController.getDocSigned);
+
 module.exports = router;
